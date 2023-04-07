@@ -1,5 +1,4 @@
 import os
-from playsound import playsound
 import requests
 from config import Config
 cfg = Config()
@@ -24,7 +23,7 @@ def eleven_labs_speech(text, voice_index=0):
     if response.status_code == 200:
         with open("speech.mpeg", "wb") as f:
             f.write(response.content)
-        playsound("speech.mpeg")
+        os.system("mpv *.mpeg")
         os.remove("speech.mpeg")
         return True
     else:
@@ -35,7 +34,7 @@ def eleven_labs_speech(text, voice_index=0):
 def gtts_speech(text):
     tts = gtts.gTTS(text)
     tts.save("speech.mp3")
-    playsound("speech.mp3")
+    os.system("mpv *.mp3")
     os.remove("speech.mp3")
 
 def say_text(text, voice_index=0):
